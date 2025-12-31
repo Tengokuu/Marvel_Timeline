@@ -1,0 +1,39 @@
+<div class="timeline-wrapper">
+  
+  <div class="timeline-track">
+    
+    <div class="progress-bar" style="width: 50%;"></div>
+    <div class="track-line"></div>
+
+    @for (item of mcuItems; track item.id) {
+      <div class="timeline-item" [class.bottom]="item.id % 2 === 0">
+        
+        <div class="timeline-dot"></div>
+
+        <div class="connector-line"></div>
+
+        <div class="mcu-card">
+            
+            <div class="poster-wrapper">
+                <img [src]="item.poster_url" alt="{{ item.tytul }}" class="poster-img">
+                
+                @if (item.id === 21) { <div class="watched-overlay">
+                      <span>✔</span>
+                  </div>
+                }
+            </div>
+
+            <div class="details-box">
+                <h3>{{ item.tytul }}</h3>
+                <p class="description">{{ item.opis_krotki }}</p>
+                
+                <a [href]="item.link_disney_plus" target="_blank" class="dplus-link">
+                    <img src="https://static-assets.bamgrid.com/product/disneyplus/images/share-default.14fadd993578b9916f855ce7bea84353.png" alt="Disney+" height="30">
+                </a>
+            </div>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

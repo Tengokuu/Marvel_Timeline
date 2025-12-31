@@ -1,0 +1,179 @@
+/* --- Zmienne --- */
+:root {
+  --marvel-red: #e62429;
+  --timeline-color: #555;
+  --card-bg: rgba(20, 20, 20, 0.95); /* Ciemne, półprzezroczyste tło detali */
+  --text-color: #f0f0f0;
+}
+
+/* --- Główny kontener --- */
+.timeline-wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Tymczasowe tło z Twojego obrazka */
+  background-image: url('https://wallpapers.com/images/hd/avengers-endgame-4k-desktop-background-f3g7421337208776.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* --- Szyna i Linie --- */
+.timeline-track {
+  display: flex;
+  padding: 0 150px;
+  position: relative;
+  align-items: center;
+}
+
+.track-line {
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  background: var(--timeline-color);
+  z-index: 0;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  position: absolute;
+  left: 0;
+  height: 8px;
+  background: var(--marvel-red);
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--marvel-red);
+}
+
+/* --- Element Osi Czasu (Kropka + Karta) --- */
+.timeline-item {
+  position: relative;
+  margin: 0 60px;
+  display: flex;
+  flex-direction: column-reverse; /* Karta nad kropką */
+  align-items: center;
+  z-index: 2;
+}
+
+.timeline-item.bottom {
+  flex-direction: column; /* Karta pod kropką */
+}
+
+.timeline-dot {
+  width: 30px;
+  height: 30px;
+  background: black;
+  border: 3px solid var(--marvel-red);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+}
+
+.connector-line {
+    height: 60px; /* Długość linii łączącej */
+    width: 3px;
+    background: var(--timeline-color);
+    margin: 5px 0; /* Odstęp od kropki i karty */
+}
+
+/* --- Karta Filmu (Kontener główny) --- */
+.mcu-card {
+  display: flex;
+  align-items: flex-start;
+  /* To jest kluczowe dla animacji hovera */
+  transition: transform 0.3s ease;
+}
+
+/* Powiększenie całej karty po najechaniu */
+.mcu-card:hover {
+    transform: scale(1.05);
+    z-index: 10; /* Żeby najechana karta była zawsze na wierzchu */
+}
+
+/* --- Plakat --- */
+.poster-wrapper {
+    position: relative;
+    width: 180px;
+    aspect-ratio: 2 / 3; /* Standardowe proporcje plakatu */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.mcu-card:hover .poster-wrapper {
+    border-color: var(--marvel-red); /* Czerwona ramka na hover */
+}
+
+.poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Nakładka "Obejrzane" --- */
+.watched-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Przyciemnienie plakatu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--marvel-red);
+    font-size: 80px;
+    font-weight: bold;
+    text-shadow: 0 0 20px black;
+}
+
+/* --- Detale (Ukryte domyślnie) --- */
+.details-box {
+    width: 300px;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    margin-left: 20px; /* Odstęp od plakatu */
+    color: var(--text-color);
+    backdrop-filter: blur(10px); /* Efekt "szkła" */
+    border: 1px solid rgba(255,255,255,0.1);
+    
+    /* Stany początkowe do animacji */
+    opacity: 0;
+    transform: translateX(-30px); /* Przesunięte w lewo, schowane za plakat */
+    pointer-events: none; /* Żeby nie reagowało na myszkę jak jest ukryte */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Płynna animacja */
+}
+
+/* POKAZYWANIE DETALI NA HOVER */
+.mcu-card:hover .details-box {
+    opacity: 1;
+    transform: translateX(0); /* Wjazd na swoje miejsce */
+    pointer-events: auto;
+}
+
+/* Typografia w detalach */
+.details-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.dplus-link img {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    transition: filter 0.3s;
+}
+
+.dplus-link:hover img {
+     filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+}
