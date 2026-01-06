@@ -96,6 +96,7 @@ body {
   position: relative;
 }
 
+/* Warstwa tła 1 (dolna) - PRZENIESIONE NA TIMELINE-TRACK */
 .timeline-track::before {
   content: '';
   position: fixed;
@@ -112,6 +113,7 @@ body {
   pointer-events: none;
 }
 
+/* Warstwa tła 2 (górna) - PRZENIESIONE NA TIMELINE-TRACK */
 .timeline-track::after {
   content: '';
   position: fixed;
@@ -128,6 +130,7 @@ body {
   pointer-events: none;
 }
 
+/* Animacja przełączania warstw */
 .timeline-track.fade-to-layer-2::before {
   opacity: 0;
 }
@@ -136,6 +139,7 @@ body {
   opacity: 1;
 }
 
+/* OŚ CZASU */
 .timeline-axis {
   position: absolute;
   top: 50%;
